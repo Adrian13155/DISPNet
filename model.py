@@ -11,61 +11,61 @@ class PSNetwork(nn.Module):
         kSize = 3
         # U
         self.conv_u = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         self.conv_Th = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         self.conv_Tt = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         self.conv_Tu = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         self.conv_Tp = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(5 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(9 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 5, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 9, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         # V
         self.conv_v = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
-        self.conv_down_v = nn.ModuleList([nn.Sequential(*[Conv_down(4, mid_channels, self.up_factor)]) for _ in range(T)])
-        self.conv_up_v = nn.ModuleList([nn.Sequential(*[Conv_up(4, mid_channels, self.up_factor)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+        self.conv_down_v = nn.ModuleList([nn.Sequential(*[Conv_down(8, mid_channels, self.up_factor)]) for _ in range(T)])
+        self.conv_up_v = nn.ModuleList([nn.Sequential(*[Conv_up(8, mid_channels, self.up_factor)]) for _ in range(T)])
         self.conv_down_p = nn.ModuleList([nn.Sequential(*[                         
             Conv_down(1, mid_channels, self.up_factor),
             nn.Conv2d(1 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         
         self.conv_Tv = nn.ModuleList([nn.Sequential(*[                         
-            nn.Conv2d(4 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
+            nn.Conv2d(8 ,64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
             nn.Conv2d(64, 64, kSize, padding=(kSize - 1) // 2, stride=1),
             nn.PReLU(),
-            nn.Conv2d(64, 4, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
+            nn.Conv2d(64, 8, kSize, padding=(kSize - 1) // 2, stride=1)]) for _ in range(T)])
         # X
-        self.conv_up = Conv_up(4, mid_channels, self.up_factor)
-        self.conv_down = Conv_down(4, mid_channels, self.up_factor)
+        self.conv_up = Conv_up(8, mid_channels, self.up_factor)
+        self.conv_down = Conv_down(8, mid_channels, self.up_factor)
 
         # Parameters 
         self.delta = nn.ParameterList([nn.Parameter(torch.tensor(0.1)) for _ in range(T)])
@@ -144,7 +144,7 @@ class PSTrainer(nn.Module):
         self.device = torch.device('cuda:{}'.format(opt.gpu_id) if torch.cuda.is_available() else 'cpu')
         self.model = model.to(self.device)
         self.optimizer = torch.optim.Adam(self.model.parameters(),lr=opt.lr_PS,betas=(opt.beta1_PS,opt.beta2_PS))        
-        self.scheduler = lr_scheduler.StepLR(self.optimizer, step_size=opt.lr_scheduler_step_PS, gamma=opt.lr_scheduler_decay_PS)
+        self.scheduler = lr_scheduler.StepLR(self.optimizer, step_size=200, gamma=opt.lr_scheduler_decay_PS)
         self.writer = SummaryWriter(opt.writer_dir_PS)
         self.criterion = nn.MSELoss().to(self.device) # SSIM_Loss() # nn.MSELoss().to(self.device)
         if opt.iscontinue:
@@ -285,19 +285,18 @@ class PSTrainer(nn.Module):
 """ Main Procedure """
 
 if __name__ == '__main__':
-    print('Hello World')
-    ms = torch.rand([1,4,32,32])
-    pan = torch.rand([1,1,128,128])
-    gt = torch.rand([1,4,128,128])
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    net = PSNetwork().to(device)
+    torch.cuda.set_device(0)
+    ms = torch.rand([1,8,32,32]).cuda()
+    pan = torch.rand([1,1,128,128]).cuda()
+    gt = torch.rand([1,8,128,128]).cuda()
+    net = PSNetwork().cuda()
     net.initialize()
-    x,H,_,_,_,_ = net(ms.to(device),pan.to(device))
+    x,H,_,_,_,_ = net(ms,pan)
     sharpen_result = x
     print('sharpen_result.size()',sharpen_result.size())
     print('sharpen_result.max()',sharpen_result.max())
     print('sharpen_result.min()',sharpen_result.min())
-    
+    print(sum(p.numel() for p in net.parameters() )/1e6, "M") 
     # configs = BaseOptions()
     # configs.print_options()
     # configs.initialize()
